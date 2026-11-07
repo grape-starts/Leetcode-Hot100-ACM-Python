@@ -2,6 +2,7 @@
 
 import { judge, runCustom, isPythonReady, checkPythonSyntax } from '../judge.js';
 import { compareAcmOutput } from '../compare.js';
+import { acmPythonTemplate } from '../acm-template.js';
 import { createEditor } from '../editor.js';
 import { registerDraftProvider } from '../assistant.js';
 import { md } from '../md.js';
@@ -44,7 +45,7 @@ export function renderProblem(container, problem) {
   container.classList.add('app-wide'); // 做题页放宽布局
   const savedAssist = getAssistState(problem.id);
   const state = {
-    mode: 'core', // core | acm
+    mode: 'acm', // core | acm
     lang: 'python', // 当前版本只提供 Python
     tab: 'desc', // desc | solution
     mobileTab: 'problem', // problem | code | result
@@ -108,7 +109,7 @@ export function renderProblem(container, problem) {
         : ''
     }
     <div id="mistake-info-slot"></div>
-    <p class="mode-note">核心代码：只写函数本体，推荐新手；ACM 模式：自己处理输入输出，适合笔试练习</p>
+    <p class="mode-note">ACM 模式：编辑器顶部提供本题的输入输出参考；核心代码模式：只写函数，由判题器调用</p>
     <div class="mobile-work-tabs" id="mobile-work-tabs" role="tablist" aria-label="做题区域">
       <button type="button" role="tab" id="mobile-tab-problem" data-mobile-tab="problem" aria-controls="problem-pane">题目</button>
       <button type="button" role="tab" id="mobile-tab-code" data-mobile-tab="code" aria-controls="code-pane">代码</button>
@@ -191,7 +192,7 @@ export function renderProblem(container, problem) {
   // ---------- 代码与草稿 ----------
 
   function templateCode() {
-    return problem.templates[state.mode][state.lang];
+    return state.mode === 'acm' ? acmPythonTemplate(problem) : problem.templates.core.python;
   }
 
   function initialCode() {
@@ -248,7 +249,7 @@ export function renderProblem(container, problem) {
     } else if (state.lang === 'cpp') {
       hint.textContent = '用 cin 读取输入，用 cout 输出答案（C++ 判题需联网，走远程编译）';
     } else {
-      hint.textContent = '用 input() 或 sys.stdin 读取输入，并用 print 输出答案';
+      hint.textContent = '编辑器顶部有本题输入输出参考；已有旧草稿可点“重置代码”获取新版模板';
     }
     if (state.lang === 'python' && !isPythonReady()) {
       hint.textContent += ' · 运行一次后开启实时语法检查';

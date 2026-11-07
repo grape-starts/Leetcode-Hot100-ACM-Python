@@ -48,7 +48,7 @@ test('偏好写入返回显式结果，存储失败不抛出', () => {
 
 test('列表视图、折叠分组和编辑器高度安全持久化', () => {
   reset();
-  assert.equal(store.getListView(), 'diff');
+  assert.equal(store.getListView(), 'tags');
   assert.deepEqual(store.getCollapsedGroups(), []);
   assert.equal(store.getEditorHeight(), 400);
 
@@ -93,7 +93,7 @@ test('新偏好拒绝非法写入并对损坏存储值使用安全默认值', ()
     hot100_collapsed_groups_v1: JSON.stringify(['数组', 1]),
     hot100_editor_height_v1: '9999',
   });
-  assert.equal(store.getListView(), 'diff');
+  assert.equal(store.getListView(), 'tags');
   assert.deepEqual(store.getCollapsedGroups(), []);
   assert.equal(store.getEditorHeight(), 400);
 

@@ -26,7 +26,7 @@ const ONBOARDING_DISMISSED_KEY = 'hot100_onboarding_dismissed_v1';
 const ASSISTANT_KEY = 'hot100_assistant_v1';
 const NAMESPACE = 'hot100_';
 
-const DEFAULT_LIST_VIEW = 'diff';
+const DEFAULT_LIST_VIEW = 'tags';
 const LIST_VIEWS = ['diff', 'flat', 'tags'];
 const DEFAULT_EDITOR_HEIGHT = 400;
 const MIN_EDITOR_HEIGHT = 200;

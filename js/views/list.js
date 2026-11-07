@@ -132,6 +132,12 @@ export function renderList(container) {
 
   container.innerHTML = `
     ${topbarHtml('list')}
+    <section class="hero" aria-labelledby="hero-title">
+      <p class="hero-eyebrow">HOT 100 · PYTHON PRACTICE</p>
+      <h1 id="hero-title">从核心代码到 ACM，逐题练会输入输出</h1>
+      <p>100 道精选题目，按知识点展开。进入题目后可切换核心代码与 ACM 模式；ACM 编辑器内附有该题的输入示例、输出示例及 Python 读写参考。</p>
+      <a href="#/problem/1" class="hero-link">从第一题开始 →</a>
+    </section>
     ${
       getOnboardingDismissed()
         ? ''
