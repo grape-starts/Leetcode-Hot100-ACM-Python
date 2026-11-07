@@ -128,6 +128,7 @@ export function renderProblem(container, problem) {
           <div class="editor-wrap">
             <div class="editor-toolbar">
               <span class="hint" id="editor-hint"></span>
+              <button type="button" class="btn" id="load-acm-example">载入可运行示例（含解法）</button>
               <button type="button" class="btn" id="reset-btn">重置代码</button>
             </div>
             <div class="editor-host" id="editor-host" aria-label="代码编辑器"></div>
@@ -240,6 +241,7 @@ export function renderProblem(container, problem) {
 
   function updateHint() {
     const hint = $('#editor-hint');
+    $('#load-acm-example').hidden = state.mode !== 'acm';
     if (state.mode === 'core') {
       hint.textContent = problem.design
         ? `实现类 ${problem.className}，判题器会按操作序列调用并比对每步返回值`
@@ -453,7 +455,13 @@ export function renderProblem(container, problem) {
   }
 
   function renderPanel() {
-    container.querySelectorAll('.panel-tabs button').forEach((button) => {
+    $('#load-acm-example').addEventListener('click', () => {
+    if (!editor || state.mode !== 'acm') return;
+    if (editor.getValue() !== templateCode() && !window.confirm('载入示例会替换当前编辑器内容，且包含完整解法。继续吗？')) return;
+    editor.setValue(problem.solutions.acm.python);
+    stageCurrentDraft();
+  });
+  container.querySelectorAll('.panel-tabs button').forEach((button) => {
       const selected = button.dataset.tab === state.tab;
       button.classList.toggle('active', selected);
       button.setAttribute('aria-selected', String(selected));
