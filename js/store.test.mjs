@@ -43,7 +43,7 @@ test('偏好写入返回显式结果，存储失败不抛出', () => {
   const result = store.setThemePref('dark');
   assert.equal(result.ok, false);
   assert.equal(result.operation, 'write');
-  assert.equal(store.getThemePref(), 'light');
+  assert.equal(store.getThemePref(), 'dark');
 });
 
 test('列表视图、折叠分组和编辑器高度安全持久化', () => {
@@ -230,7 +230,7 @@ test('version 2 导出采用严格 schema，并支持偏好 merge/replace', () =
   assert.deepEqual(Object.keys(payload).sort(), ['app', 'data', 'exportedAt', 'version']);
   assert.deepEqual(Object.keys(payload.data).sort(), ['customInputs', 'drafts', 'learning', 'mistakes', 'preferences', 'progress']);
   assert.deepEqual(payload.data.preferences, {
-    lang: 'python', theme: 'light', listView: 'tags',
+    lang: 'python', theme: 'dark', listView: 'tags',
     collapsedGroups: ['数组', '链表'], editorHeight: 720,
     listFilters: { q: '', diff: '', tag: '', status: '' }, onboardingDismissed: false,
   });

@@ -158,7 +158,7 @@ export function setLangPref(lang) {
 
 export function getThemePref() {
   const result = readRaw(THEME_KEY);
-  return result.ok && result.value ? result.value : 'light';
+  return result.ok && result.value ? result.value : 'dark';
 }
 
 export function setThemePref(theme) {

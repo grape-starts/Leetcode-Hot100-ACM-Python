@@ -8,7 +8,7 @@
   <script>
     // 首屏渲染前应用主题，避免闪烁；同步更新主题按钮的可访问名称。
     try {
-      document.documentElement.dataset.theme = localStorage.getItem('hot100_theme_v1') || 'light';
+      document.documentElement.dataset.theme = localStorage.getItem('hot100_theme_v1') || 'dark';
     } catch (e) {}
     document.addEventListener('DOMContentLoaded', function () {
       var updateThemeName = function () {
@@ -28,6 +28,7 @@
   </script>
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/views-extras.css">
+  <link rel="stylesheet" href="css/vibrancy.css">
 </head>
 <body>
   <a class="skip-link" href="#app">跳到主要内容</a>
